@@ -220,7 +220,9 @@ syntax match Function '^[^'"0-9 ]\S*\s\+::'he=e-2
 syntax match Normal '::'
 
 " Modules
-syntax keyword Keyword module import qualified hiding as
+syntax keyword hsImport import qualified hiding as
+syntax keyword Keyword module
+" syntax keyword Keyword module import qualified hiding as
 
 " Types
 syntax match Type '\<\u\S*\>'
@@ -239,14 +241,14 @@ syntax keyword Keyword if then else
 syntax keyword Keyword infix infixl infixr
 syntax match Function '`[^ `]*`'
 
-" Comments
-syntax match Comment '--.*'
-syntax region Comment start='{-' end='-}'
-syntax region hsPragma start='{-#' end='#-}'
-
 " Brackets
 syntax region hsBracket matchgroup=Bracket start="[({\[]" end="[\]})]" transparent
 syntax region Function matchgroup=Bracket start="^(" end=")\s\+::"he=e-2 contains=Function
+
+" Comments
+syntax match Comment '--.*'
+syntax region Comment start='{-' end='-}'
+syntax region haskellPragma start='{-#' end='#-}'
 
 " Formatting
 let g:haskell_tabular = 1
