@@ -210,4 +210,49 @@ if get(g:, 'haskell_backpack', 0)
   highlight def link haskellBackpackStructure Structure
   highlight def link haskellBackpackDependency Include
 endif
+
+" I don't like highlighted operators
+highlight! link haskellOperators Normal
+
+" Functions
+syntax match Function '^[^'"0-9 ]\S*\s\+\S'he=e-1
+syntax match Function '^[^'"0-9 ]\S*\s\+::'he=e-2
+syntax match Normal '::'
+
+" Modules
+syntax keyword Keyword module import qualified hiding as
+
+" Types
+syntax match Type '\<\u\S*\>'
+syntax keyword Keyword data type typedef default deriving instance
+
+" Case
+syntax keyword Keyword case of
+
+" Scope declaration
+syntax keyword Keyword let in where class do _
+
+" If then
+syntax keyword Keyword if then else
+
+" Infix
+syntax keyword Keyword infix infixl infixr
+syntax match Function '`[^ `]*`'
+
+" Comments
+syntax match Comment '--.*'
+syntax region Comment start='{-' end='-}'
+syntax region hsPragma start='{-#' end='#-}'
+
+" Brackets
+syntax region hsBracket matchgroup=Bracket start="[({\[]" end="[\]})]" transparent
+syntax region Function matchgroup=Bracket start="^(" end=")\s\+::"he=e-2 contains=Function
+
+" Formatting
+let g:haskell_tabular = 1
+
+vnoremap <silent> <buffer> a= :Tabularize /=<CR>
+vnoremap <silent> <buffer> a; :Tabularize /::<CR>
+vnoremap <silent> <buffer> a- :Tabularize /-><CR>
+
 let b:current_syntax = "haskell"
