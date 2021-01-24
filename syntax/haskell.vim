@@ -216,7 +216,6 @@ highlight! link haskellOperators Normal
 
 " Functions
 syntax match Function '^[^'"0-9 ]\S*\s\+\S'he=e-1
-syntax match Function '^[^'"0-9 ]\S*\s\+::'he=e-2
 syntax match Normal '::'
 
 " Modules
@@ -231,7 +230,10 @@ syntax keyword Keyword data type typedef default deriving instance
 syntax keyword Keyword case of
 
 " Variables and scopes
-syntax keyword Keyword let in where class do _
+syntax keyword Keyword let in where class do
+
+" Patterns
+syntax match Operator '\(_\||\)'
 
 " Conditionals
 syntax keyword Keyword if then else otherwise
