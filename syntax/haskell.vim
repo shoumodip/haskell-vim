@@ -219,8 +219,7 @@ syntax match Function '^[^'"0-9 ]\S*\s\+\S'he=e-1
 syntax match Normal '::'
 
 " Modules
-syntax keyword Include import qualified hiding as
-syntax keyword Keyword module
+syntax keyword Keyword import qualified hiding as module
 
 " Types
 syntax match Type '\<\u\S*\>'
@@ -233,7 +232,7 @@ syntax keyword Keyword case of
 syntax keyword Keyword let in where class do
 
 " Patterns
-syntax match Operator '\(_\||\)'
+syntax match Keyword '\(_\||\)'
 
 " Conditionals
 syntax keyword Keyword if then else otherwise
