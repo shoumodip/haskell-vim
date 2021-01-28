@@ -219,7 +219,8 @@ syntax match Function '^[^'"0-9 ]\S*\s\+\S'he=e-1
 syntax match Normal '::'
 
 " Modules
-syntax keyword Keyword import qualified hiding as module
+syntax keyword Include import qualified
+syntax keyword Keyword hiding as module
 
 " Types
 syntax match Type '\<\u\S*\>'
