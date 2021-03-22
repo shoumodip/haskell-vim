@@ -25,7 +25,7 @@ syn match haskellRecordField contained containedin=haskellBlock
   \ haskellSeparator,
   \ haskellParens
 syn match haskellTypeSig
-  \ "^\s*\(where\s\+\|let\s\+\|default\s\+\)\?[_a-z][a-zA-Z0-9_']*#\?\(,\s*[_a-z][a-zA-Z0-9_']*#\?\)*\_s\+::\_s"
+  \ "\s*\(where\s\+\|let\s\+\|default\s\+\)\?[_a-z][a-zA-Z0-9_']*#\?\(,\s*[_a-z][a-zA-Z0-9_']*#\?\)*\_s\+::\_s"
   \ contains=
   \ haskellWhere,
   \ haskellLet,
@@ -63,7 +63,7 @@ syn match haskellImport "^\s*\<import\>\s\+\(\<safe\>\s\+\)\?\(\<qualified\>\s\+
   \ haskellBlockComment,
   \ haskellString,
   \ haskellPragma
-syn keyword haskellKeyword do case of
+syn keyword haskellKeyword do case of data type typedef otherwise
 if get(g:, 'haskell_enable_static_pointers', 0)
   syn keyword haskellStatic static
 endif
@@ -210,52 +210,5 @@ if get(g:, 'haskell_backpack', 0)
   highlight def link haskellBackpackStructure Structure
   highlight def link haskellBackpackDependency Include
 endif
-
-" I don't like highlighted operators
-highlight! link haskellOperators Normal
-
-" Functions
-syntax match Function '^[^'"0-9 ]\S*\s\+\S'he=e-1
-syntax match Normal '::'
-
-" Modules
-syntax keyword Include import qualified
-syntax keyword Keyword hiding as module
-
-" Types
-syntax match Type '\<\u\S*\>'
-syntax keyword Keyword data type typedef default deriving instance
-
-" Case
-syntax keyword Keyword case of
-
-" Variables and scopes
-syntax keyword Keyword let in where class do
-
-" Patterns
-syntax match Keyword '\(_\||\)'
-
-" Conditionals
-syntax keyword Keyword if then else otherwise
-
-" Infix
-syntax keyword Keyword infix infixl infixr
-syntax match Function '`[^ `]*`'
-
-" Brackets
-syntax region hsBracket matchgroup=Bracket start="[({\[]" end="[\]})]" transparent
-syntax region Function matchgroup=Bracket start="^(" end=")\s\+::"he=e-2 contains=Function
-
-" Comments
-syntax match Comment '--.*'
-syntax region Comment start='{-' end='-}'
-syntax region haskellPragma start='{-#' end='#-}'
-
-" Formatting
-let g:haskell_tabular = 1
-
-vnoremap <silent> <buffer> a= :Tabularize /=<CR>
-vnoremap <silent> <buffer> a; :Tabularize /::<CR>
-vnoremap <silent> <buffer> a- :Tabularize /-><CR>
 
 let b:current_syntax = "haskell"
